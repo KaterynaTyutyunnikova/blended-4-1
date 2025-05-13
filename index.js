@@ -1,0 +1,10 @@
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))n(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const i of r.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&n(i)}).observe(document,{childList:!0,subtree:!0});function o(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(e){if(e.ep)return;e.ep=!0;const r=o(e);fetch(e.href,r)}})();const l=document.querySelector(".header-form");document.querySelector(".theme-toggle-button");const a=document.querySelector(".tasks-list");function c(s){const t=JSON.parse(localStorage.getItem("tasks"))||[];t.push(s),localStorage.setItem("tasks",JSON.stringify(t))}function u(s){const o=(JSON.parse(localStorage.getItem("tasks"))||[]).filter((n,e)=>e!==s);localStorage.setItem("tasks",JSON.stringify(o))}function d(){const t=(JSON.parse(localStorage.getItem("tasks"))||[]).map(({title:o,description:n})=>`<li class="task-list-item">
+        <button class="task-list-item-btn">Delete</button>
+        <h3> ${o}</h3>
+        <p>${n}</p>
+      </li>`).join("");a.insertAdjacentHTML("beforeend",t)}function f({title:s,description:t}){const o=`<li class="task-list-item">
+        <button class="task-list-item-btn">Delete</button>
+        <h3> ${s}</h3>
+        <p>${t}</p>
+      </li>`;a.insertAdjacentHTML("beforeend",o)}d();l.addEventListener("submit",s=>{s.preventDefault();const t=s.target.elements.taskName.value,o=s.target.elements.taskDescription.value.trim();if(console.log(t),console.log(o),!t===""||!o===""){alert("Please fill in all fields");return}f({title:t,description:o}),c({title:t,description:o}),l.reset()});a.addEventListener("click",s=>{if(s.target.classList.contains("task-list-item-btn")){const t=s.target.closest(".task-list-item");console.log(t);const n=[...a.children].indexOf(t);u(n),t.remove()}});
+//# sourceMappingURL=index.js.map
